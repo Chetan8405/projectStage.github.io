@@ -1,0 +1,156 @@
+mysql> use firstdb;
+Database changed
+mysql> show tables;
++-------------------+
+| Tables_in_firstdb |
++-------------------+
+| studentdb         |
++-------------------+
+1 row in set (0.04 sec)
+
+mysql> select*from studentdb;
+Empty set (0.02 sec)
+
+mysql> insert into studentdb(roll,name,dept) values(201,'John','Computer');
+Query OK, 1 row affected (0.05 sec)
+
+mysql> select*from studentdb;
++------+------+----------+
+| roll | name | dept     |
++------+------+----------+
+|  201 | John | Computer |
++------+------+----------+
+1 row in set (0.00 sec)
+
+mysql> insert into studentdb(roll,name,dept) values(101,'Roman','Civil');
+Query OK, 1 row affected (0.03 sec)
+
+mysql> select*from studentdb;
++------+-------+----------+
+| roll | name  | dept     |
++------+-------+----------+
+|  201 | John  | Computer |
+|  101 | Roman | Civil    |
++------+-------+----------+
+2 rows in set (0.00 sec)
+
+mysql> truncate table studentdb;
+Query OK, 0 rows affected (0.10 sec)
+
+mysql> select*from studentdb;
+Empty set (0.00 sec)
+
+mysql> desc studentdb;
++-------+-------------+------+-----+---------+-------+
+| Field | Type        | Null | Key | Default | Extra |
++-------+-------------+------+-----+---------+-------+
+| roll  | int         | YES  |     | NULL    |       |
+| name  | varchar(20) | YES  |     | NULL    |       |
+| dept  | varchar(20) | YES  |     | NULL    |       |
++-------+-------------+------+-----+---------+-------+
+3 rows in set (0.00 sec)
+
+mysql> insert into studentdb(roll,name,dept) values(101,'Roman','Civil');
+Query OK, 1 row affected (0.03 sec)
+
+mysql> insert into studentdb(roll,name,dept) values(201,'John','Computer');
+Query OK, 1 row affected (0.03 sec)
+
+mysql> select*from studentdb;
++------+-------+----------+
+| roll | name  | dept     |
++------+-------+----------+
+|  101 | Roman | Civil    |
+|  201 | John  | Computer |
++------+-------+----------+
+2 rows in set (0.00 sec)
+
+mysql> desc studentdb;
++-------+-------------+------+-----+---------+-------+
+| Field | Type        | Null | Key | Default | Extra |
++-------+-------------+------+-----+---------+-------+
+| roll  | int         | YES  |     | NULL    |       |
+| name  | varchar(20) | YES  |     | NULL    |       |
+| dept  | varchar(20) | YES  |     | NULL    |       |
++-------+-------------+------+-----+---------+-------+
+3 rows in set (0.03 sec)
+
+mysql> truncate table studentdb;
+Query OK, 0 rows affected (0.08 sec)
+
+mysql> desc studentdb;
++-------+-------------+------+-----+---------+-------+
+| Field | Type        | Null | Key | Default | Extra |
++-------+-------------+------+-----+---------+-------+
+| roll  | int         | YES  |     | NULL    |       |
+| name  | varchar(20) | YES  |     | NULL    |       |
+| dept  | varchar(20) | YES  |     | NULL    |       |
++-------+-------------+------+-----+---------+-------+
+3 rows in set (0.01 sec)
+
+mysql> drop table studentdb;
+Query OK, 0 rows affected (0.06 sec)
+
+mysql> create table studenttbl(roll int,name varchar(20),dept varchar(20));
+Query OK, 0 rows affected (0.06 sec)
+
+mysql> use firstdb;
+Database changed
+mysql> create table studenttbl(roll int,name varchar(20),dept varchar(20));
+ERROR 1050 (42S01): Table 'studenttbl' already exists
+mysql> select*from studenttbl;
+Empty set (0.00 sec)
+
+mysql> insert into studenttbl(roll,name,dept) values(201,'John','Computer');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into studenttbl(roll,name,dept) values(101,'Roman','Computer');
+Query OK, 1 row affected (0.03 sec)
+
+mysql> select * from studenttbl;
++------+-------+----------+
+| roll | name  | dept     |
++------+-------+----------+
+|  201 | John  | Computer |
+|  101 | Roman | Computer |
++------+-------+----------+
+2 rows in set (0.00 sec)
+
+mysql> insert into studenttbl values
+    -> (102,'Dean','Computer'),
+    -> (103,'Randy','Civil'),
+    -> (104,'James','Mechanical'),
+    -> (105,'Brock','E&TC'),
+    -> (106,'Becky','Electrical');
+Query OK, 5 rows affected (0.03 sec)
+Records: 5  Duplicates: 0  Warnings: 0
+
+mysql> select * from studenttbl;
++------+-------+------------+
+| roll | name  | dept       |
++------+-------+------------+
+|  201 | John  | Computer   |
+|  101 | Roman | Computer   |
+|  102 | Dean  | Computer   |
+|  103 | Randy | Civil      |
+|  104 | James | Mechanical |
+|  105 | Brock | E&TC       |
+|  106 | Becky | Electrical |
++------+-------+------------+
+7 rows in set (0.00 sec)
+
+mysql> select name * from studenttbl;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'from studenttbl' at line 1
+mysql> select name from studenttbl;
++-------+
+| name  |
++-------+
+| John  |
+| Roman |
+| Dean  |
+| Randy |
+| James |
+| Brock |
+| Becky |
++-------+
+7 rows in set (0.00 sec)
